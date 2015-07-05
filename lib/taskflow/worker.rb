@@ -6,6 +6,8 @@ class Taskflow::Worker
     def perform(task_flow_id,job_id,opts={})
         flow = Taskflow::Flow.find task_flow_id
         task = Taskflow::Task.find job_id
+        # reload task with its type
+        task = Kernel.const_get(task.klass).find job_id
         begin
             reason = catch :control do
                 check_flow_state flow

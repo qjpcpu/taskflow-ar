@@ -10,12 +10,13 @@ class Taskflow::Task < ActiveRecord::Base
 
 
     before_save :set_default_property
-    has_and_belongs_to_many :downstream, :class_name=>'Taskflow::Task',:inverse_of=>:upstream,:join_table=> :taskflow_downstreams
-    has_and_belongs_to_many :upstream, :class_name=>'Taskflow::Task',:inverse_of=>:downstream,:join_table=> :taskflow_upstreams
+    has_and_belongs_to_many :downstream, :class_name=>'Taskflow::Task',:inverse_of=>:upstream,:join_table=> :taskflow_relation,:foreign_key=> 'upstream_id'
+    has_and_belongs_to_many :upstream, :class_name=>'Taskflow::Task',:inverse_of=>:downstream,:join_table=> :taskflow_relation,:foreign_key=> 'downstream_id'
 
     belongs_to :flow,:class_name=>'Taskflow::Flow',:inverse_of=>:tasks
 
     def go(sidekiq_logger)
+        raise NotImplementedError
     end
 
     def resume

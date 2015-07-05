@@ -33,7 +33,7 @@ class Taskflow::Flow < ActiveRecord::Base
     end
 
     def running_steps
-        self.tasks.in(state: ['running','paused'])
+        self.tasks.where(state: ['running','paused'])
     end
 
     # opts support :name,:params
@@ -47,12 +47,23 @@ class Taskflow::Flow < ActiveRecord::Base
         task = klass.create obj.select{|k,v| v }
         if opts[:before]
             task.downstream << opts[:before]
+            if opts[:before].is_a? Array
+                opts[:before].each{|b| b.upstream << task}
+            else
+                opts[:before].upstream << task
+            end
         end
         if opts[:after]
             task.upstream << opts[:after]
+            if opts[:after].is_a? Array
+                opts[:after].each{|d| d.downstream << task }
+            else
+                opts[:after].downstream << task
+            end
         end
         if opts[:before].nil? && opts[:after].nil? && self.tasks.last
             self.tasks.last.downstream << task
+            task.upstream << self.tasks.last
         end
         self.tasks << task
         task
@@ -110,7 +121,6 @@ class Taskflow::Flow < ActiveRecord::Base
         self.state ||= 'pending'
         self.category ||= 'simple'
         self.input ||= {}
-        self.next_config ||= {}
         self.progress ||= 0
     end
 end

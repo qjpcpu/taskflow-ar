@@ -18,8 +18,7 @@ module Taskflow
             migration_template "create_taskflow_tasks.rb", "db/migrate/create_taskflow_tasks.rb"
             migration_template "create_taskflow_loggers.rb", "db/migrate/create_taskflow_loggers.rb"
             migration_template "create_taskflow_records.rb", "db/migrate/create_taskflow_records.rb"
-            migration_template "create_taskflow_downstreams.rb", "db/migrate/create_taskflow_downstreams.rb"
-            migration_template "create_taskflow_upstreams.rb", "db/migrate/create_taskflow_upstreams.rb"
+            migration_template "create_taskflow_relation.rb", "db/migrate/create_taskflow_relation.rb"
         end
     end
 
