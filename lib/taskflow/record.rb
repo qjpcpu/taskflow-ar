@@ -1,7 +1,7 @@
 class Taskflow::Record < ActiveRecord::Base
 
     belongs_to :tflogger,:class_name=>'Taskflow::Logger',:inverse_of=>:records
-    serialize :tags, JSON
+    serialize :tags, Taskflow::CustomHash
 
     before_save :set_default_property
 

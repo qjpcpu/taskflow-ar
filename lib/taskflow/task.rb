@@ -3,10 +3,10 @@ class Taskflow::Task < ActiveRecord::Base
     # do not save myself in up or downstream
     before_save :remove_self_in_stream
 
-    serialize :data, JSON
-    serialize :input, JSON
-    serialize :output, JSON
-    serialize :error, JSON
+    serialize :data, Taskflow::CustomHash
+    serialize :input, Taskflow::CustomHash
+    serialize :output, Taskflow::CustomHash
+    serialize :error, Taskflow::CustomHash
 
 
     before_save :set_default_property

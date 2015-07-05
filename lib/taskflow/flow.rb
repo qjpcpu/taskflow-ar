@@ -1,8 +1,8 @@
 # coding: utf-8
 class Taskflow::Flow < ActiveRecord::Base
 
-    serialize :input, JSON
-    serialize :next_config, JSON
+    serialize :input, Taskflow::CustomHash
+    serialize :next_config, Taskflow::CustomHash
     before_save :set_default_property
 
     after_create :configure_tasks

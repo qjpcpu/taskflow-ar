@@ -7,7 +7,7 @@ class CreateTaskflowRecords < ActiveRecord::Migration
             t.string :content
             t.text :tags
             t.datetime :written_at
-            t.integer :tflogger_id
+            t.integer :logger_id
         end
     end
 end
