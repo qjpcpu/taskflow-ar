@@ -20,6 +20,11 @@ Or install it yourself as:
 
     $ gem install taskflow-ar
 
+Generate database migration file:
+
+    $ rails g taskflow migration
+    $ rake db:migrate
+
 ## Usage
 
 example:
