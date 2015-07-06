@@ -1,6 +1,6 @@
 # Taskflow
 
-Taskflow is a cool rails plugin for creating and schedule task flows. NOTE: taskflow is based sidekiq, and use ActiveRecord/Mongoid as its database adapter, choose the right gem(another version taskflow is also in my github) for your project
+Taskflow is a cool rails plugin for creating and schedule task flows. NOTE: taskflow is based sidekiq, and use ActiveRecord/Mongoid as its database adapter, choose the right gem(another version taskflow is also available on my github) for your project.
 
 ## Installation
 
@@ -22,6 +22,8 @@ Generate database migration file:
 
     $ rails g taskflow migration
     $ rake db:migrate
+
+Tips: if you want use taskflow outside rails, you can just copy these migration files out and creat database table according to the files.
 
 ## Usage
 
@@ -152,6 +154,10 @@ After checking out the repo, run `bin/setup` to install dependencies. You can al
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Documentations
+### Taskflow state diagram
+flow state
+![output](https://raw.githubusercontent.com/qjpcpu/taskflow-ar/master/images/flow-state.png)
+
 ### the Taskflow::Flow
 First, you should create your taskflow by inherit `Taskflow::Flow`, and you *must implement the `configure` method* to tell taskflow engine the detail info.
 
