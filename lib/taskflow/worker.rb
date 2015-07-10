@@ -1,7 +1,6 @@
 # coding: utf-8
 class Taskflow::Worker
     include ::Sidekiq::Worker
-    sidekiq_options :retry => false
 
     def perform(task_flow_id,job_id,opts={})
         flow = Taskflow::Flow.find task_flow_id

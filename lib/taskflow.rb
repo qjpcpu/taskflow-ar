@@ -11,4 +11,13 @@ module Taskflow
     def self.table_name_prefix
         'taskflow_'
     end
+
+    def self.worker_options=(opts)
+        orig = HashWithIndifferentAccess.new(Worker.sidekiq_options_hash || {})
+        Worker.sidekiq_options_hash = orig.merge(opts).merge(retry: false)
+    end
+    
+    def self.configure
+        yield self
+    end
 end
